@@ -113,28 +113,33 @@ const data = [
 
 */
 
-function createArticle (title, date, firstParagraph, secondParagraph, thirdParagraph) {
+function createArticle (content) {
   const article = document.createElement('div')
   article.classList.add('article')
   
   const titleh2 = document.createElement('h2')
-  titleh2.textContent = title
+  titleh2.textContent = content.title
 
   const datep = document.createElement('p')
-  datep.textContent = date
+  datep.textContent = content.date
   datep.classList.add('date')
 
   const firstParagraphp = document.createElement('p')
-  firstParagraphp.textContent = firstParagraph
+  firstParagraphp.textContent = content.firstParagraph
 
   const secondParagraphp = document.createElement('p')
-  secondParagraphp.textContent = secondParagraph
+  secondParagraphp.textContent = content.secondParagraph
 
   const thirdParagraphp = document.createElement('p')
-  thirdParagraphp.textContent = thirdParagraph
+  thirdParagraphp.textContent = content.thirdParagraph
 
   const eButton = document.createElement('span')
   eButton.classList.add('expandButton')
+  eButton.textContent = 'Expand'
+  eButton.addEventListener('click', event => {
+    event.preventDefault();
+    article.classList.toggle('article-open')
+  })
 
 
   article.appendChild(titleh2)
@@ -147,4 +152,5 @@ function createArticle (title, date, firstParagraph, secondParagraph, thirdParag
   return article
 }
 
-createArticle(title, date, paragraph, paragraph, paragraph);
+const articlesDiv = document.querySelector('.articles')
+data.forEach(content => articlesDiv.append(createArticle(content)))
